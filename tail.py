@@ -1,19 +1,19 @@
-import time
-def taiil(input, numOfLines=10, follow=False):
+def tail(input, numOfLines=10, follow=False):
     counter=0
     for line in  reversed(list(open(input))):
         if counter==numOfLines:
             break
         print(line.rstrip())
-        if follow:
-            while True:
-                new_lines = list(open(input))[::-1]
-                if len(new_lines) > counter:
-                    for new_line in new_lines[counter:]:
-                        print(new_line.rstrip())
-                        counter = len(new_lines)
-                        time.sleep(1)
         counter+=1
+    if follow:
+        while True:
+            new_lines = (list(open(input))[::-1])
+            if len(new_lines) <= numOfLines:
+                for new_line in new_lines[counter:]:
+                    print(new_line.rstrip())
+                    counter = len(new_lines)
+            else:
+                break
 if __name__ == "__main__":
     import sys
     input = sys.argv[1]
@@ -27,4 +27,4 @@ if __name__ == "__main__":
             follow=True
     else:
         follow=False
-    taiil(input, numOfLines, follow)
+    tail(input, numOfLines, follow)
