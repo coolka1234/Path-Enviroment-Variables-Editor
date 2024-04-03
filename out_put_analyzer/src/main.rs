@@ -1,4 +1,4 @@
-use std::collections::{HashMap};
+use std::collections::HashMap;
 use std::env;
 use std::error::Error;
 use std::fs::File;
@@ -93,6 +93,5 @@ fn write_to_json(analysis: &FileAnalysis, output_path: &str) -> Result<(), Box<d
 
     let mut output_file = File::create(output_path)?;
     output_file.write_all(json_output.as_bytes())?;
-    println!("Analysis result written to {}", output_path);
     Ok(())
 }
