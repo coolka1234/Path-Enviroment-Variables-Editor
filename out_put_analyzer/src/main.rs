@@ -15,7 +15,7 @@ struct FileAnalysis {
     num_rows: usize,
     num_words: usize,
 }
-
+//cargo run --release C:\Users\krzys\OneDrive\Pulpit\Studia\Semestr4\SkryptoweLab\Lista4\Araujo.txt
 fn main() {
     let args: Vec<String> = env::args().collect();
     if args.len() != 2 {
@@ -23,12 +23,8 @@ fn main() {
         return;
     }
     let file_path = &args[1];
-
     if let Ok(analysis) = analyze_file(file_path) {
-        // Print analysis result
         println!("{:#?}", &analysis);
-
-        // Write analysis result to JSON file
         if let Err(err) = write_to_json(&analysis, "output.json") {
             eprintln!("Error writing to JSON file: {}", err);
         }
@@ -70,7 +66,6 @@ fn analyze_file(file_path: &str) -> Result<FileAnalysis, Box<dyn Error>> {
         .max_by_key(|&(_, count)| count)
         .map(|(word, _)| word.to_string());
 
-    // Find the most and least common characters
     let most_common_char = char_count_map
         .iter()
         .max_by_key(|&(_, count)| count)
@@ -81,7 +76,6 @@ fn analyze_file(file_path: &str) -> Result<FileAnalysis, Box<dyn Error>> {
         .min_by_key(|&(_, count)| count)
         .map(|(char, _)| *char);
 
-    // Create FileAnalysis struct
     let analysis = FileAnalysis {
         file_path: String::from(file_path),
         num_characters: total_chars,
@@ -94,14 +88,11 @@ fn analyze_file(file_path: &str) -> Result<FileAnalysis, Box<dyn Error>> {
 
     Ok(analysis)
 }
-
-// Function to write analysis result to JSON file
 fn write_to_json(analysis: &FileAnalysis, output_path: &str) -> Result<(), Box<dyn Error>> {
     let json_output = serde_json::to_string_pretty(analysis)?;
 
     let mut output_file = File::create(output_path)?;
     output_file.write_all(json_output.as_bytes())?;
-
     println!("Analysis result written to {}", output_path);
     Ok(())
 }
