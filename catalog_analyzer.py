@@ -2,11 +2,12 @@ from collections import Counter
 import os
 import subprocess
 import json
+import sys
 def process_files(directory):
     results = []
     for filename in os.listdir(directory):
         if os.path.isfile(os.path.join(directory, filename)):
-            output = subprocess.run([r"C:\Users\krzys\OneDrive\Pulpit\Studia\Semestr4\SkryptoweLab\Lista4\out_put_analyzer\\target\\release\out_put_analyzer.exe"
+            subprocess.run([r"C:\Users\krzys\OneDrive\Pulpit\Studia\Semestr4\SkryptoweLab\Lista4\out_put_analyzer\\target\\release\out_put_analyzer.exe"
                            ,os.path.join(directory, filename)], capture_output=True, shell=True, text=True, check=True)
             with open('output.json') as f:
                 result = json.load(f)
@@ -38,5 +39,5 @@ def process_dict_list(dict_list):
     return summary
 
 if __name__ == "__main__":
-    dict_list=process_files(r"C:\Users\krzys\OneDrive\Pulpit\Studia\Semestr4\SkryptoweLab\Lista4")
+    dict_list=process_files(os.path.normpath(sys.argv[1]))
     process_dict_list(dict_list)
