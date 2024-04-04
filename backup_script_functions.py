@@ -1,4 +1,5 @@
 import os
+import shutil
 import subprocess
 import datetime
 import time
@@ -13,9 +14,8 @@ def copyFiles(source, destination, backupName):
     renameFiles(destination, datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")+"-"+backupName)
     print(f"Files copied from {source} to {destination}")
 
-def deleteFiles(path):
-    subprocess.run(["rmdir", path, "/s", "/q"])
-    print(f"Files deleted from {path}")
+def deleteFolder(path):
+    subprocess.run(["powershell", "Remove-Item", path, "-Recurse", "-Force"])
 def renameFiles(path, backupName):
     id_counter = 0
     for root, dirs, files in os.walk(path, topdown=False):
@@ -50,5 +50,5 @@ def backup_catalog(pathOfFileToBackup, newBackupPath=None):
     if newBackupPath is not None:
         createEnviromentalVariable(name="BACKUPS_DIR", value=newBackupPath)
     copyFiles(pathOfFileToBackup, os.environ["BACKUPS_DIR"])
-    deleteFiles(pathOfFileToBackup)
+    deleteFolder(pathOfFileToBackup)
     print("Backup completed")
