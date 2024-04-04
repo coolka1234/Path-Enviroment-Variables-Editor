@@ -10,7 +10,7 @@
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
-            "args": "C:\\Users\\krzys\\OneDrive\\Pulpit\\Studia\\Semestr4\\SkryptoweLab\\Lista4\\backup.py"
+            "args": ["C:\\Users\\krzys\\OneDrive\\Pulpit\\Studia\\Semestr4\\SkryptoweLab\\Lista4\\backup.py"],
         }
     ]
 }
