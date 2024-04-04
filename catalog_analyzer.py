@@ -7,7 +7,7 @@ def process_files(directory):
     results = []
     for filename in os.listdir(directory):
         if os.path.isfile(os.path.join(directory, filename)):
-            subprocess.run([r"C:\Users\krzys\OneDrive\Pulpit\Studia\Semestr4\SkryptoweLab\Lista4\out_put_analyzer\\target\\release\out_put_analyzer.exe"
+            subprocess.run([os.getcwd()+r"\out_put_analyzer\\target\\release\out_put_analyzer.exe"
                            ,os.path.join(directory, filename)], capture_output=True, shell=True, text=True, check=True)
             with open('output.json') as f:
                 result = json.load(f)
