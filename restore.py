@@ -1,3 +1,4 @@
+from math import e
 import os
 import subprocess
 import csv
@@ -33,9 +34,15 @@ def restore(path=os.path.join(os.getcwd(), ".backups")):
     subprocess.run(["powershell", "Expand-Archive","-Force",pathOfArchive, path])
     print("Archive unpacked successfully")
 if __name__ == "__main__":
-    if(len(sys.argv)<=1):
-        restore()
-    else:
-        restore(sys.argv[1])
+    try:
+        if(len(sys.argv)<=1):
+            restore()
+        else:
+            restore(sys.argv[1])
+    except Exception as e:
+        print(e)
+        print("Usage: python restore.py [pathToBackupDirectory]")
+        print("pathToBackupDirectory - path to directory where backup is stored")
+        sys.exit(1)
 
 

@@ -4,6 +4,10 @@ import subprocess
 import datetime
 import time
 def createEnviromentalVariable(name="BACKUPS_DIR", value=None):
+    if name in os.environ:
+        copyFiles(os.environ[name], value, "backup", False)
+        deleteFolder(os.environ[name])
+        print(f"Environmental variable {name} already exists. Deleting old folder and copying files to new location")
     value = os.path.expanduser(r"~")
     value=os.path.join(value, "backups")
     os.environ[name] = value
@@ -47,13 +51,6 @@ def renameFiles(path, backupName):
                 os.rename(os.path.join(root, name), insert_before_dot(new_dir_path, id_counter))
                 id_counter += 1
 
-
-def backup_catalog(pathOfFileToBackup, newBackupPath=None):
-    if newBackupPath is not None:
-        createEnviromentalVariable(name="BACKUPS_DIR", value=newBackupPath)
-    copyFiles(pathOfFileToBackup, os.environ["BACKUPS_DIR"])
-    deleteFolder(pathOfFileToBackup)
-    print("Backup completed")
 
 def insert_before_dot(filename, string_to_insert):
     name, extension = os.path.splitext(filename)
