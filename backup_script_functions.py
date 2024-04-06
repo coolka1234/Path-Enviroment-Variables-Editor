@@ -9,9 +9,10 @@ def createEnviromentalVariable(name="BACKUPS_DIR", value=None):
     os.environ[name] = value
     print(f"Environmental variable {name} set to {value}")
 
-def copyFiles(source, destination, backupName):
+def copyFiles(source, destination, backupName, namesSignature):
     subprocess.run(["robocopy", source, destination, "/E"])
-    renameFiles(destination, datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")+"-"+backupName)
+    if namesSignature:
+        renameFiles(destination, datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")+"-"+backupName)
     print(f"Files copied from {source} to {destination}")
 
 def deleteFolder(path):
@@ -31,7 +32,7 @@ def renameFiles(path, backupName):
             except FileNotFoundError:
                 print(f"File {name} from {os.path.join(root, name)} not found")
             except FileExistsError:
-                os.rename(os.path.join(root, name), new_file_path+f"_{id_counter}")
+                os.rename(os.path.join(root, name), insert_before_dot(new_file_path, id_counter))
                 id_counter += 1
         for name in dirs:
             time_of_file = os.path.getmtime(os.path.join(root, name))
@@ -43,7 +44,7 @@ def renameFiles(path, backupName):
             except FileNotFoundError:
                 print(f"Directory {name} from {os.path.join(root, name)} not found")
             except FileExistsError:
-                os.rename(os.path.join(root, name), new_dir_path+f"_{id_counter}")
+                os.rename(os.path.join(root, name), insert_before_dot(new_dir_path, id_counter))
                 id_counter += 1
 
 
@@ -53,3 +54,8 @@ def backup_catalog(pathOfFileToBackup, newBackupPath=None):
     copyFiles(pathOfFileToBackup, os.environ["BACKUPS_DIR"])
     deleteFolder(pathOfFileToBackup)
     print("Backup completed")
+
+def insert_before_dot(filename, string_to_insert):
+    name, extension = os.path.splitext(filename)
+    new_name = f"{name}_{string_to_insert}{extension}"
+    return new_name
