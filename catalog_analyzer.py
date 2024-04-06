@@ -11,6 +11,7 @@ def process_files(directory):
                            ,os.path.join(directory, filename)], capture_output=True, shell=True, text=True, check=True)
             with open('output.json') as f:
                 result = json.load(f)
+                f.close()
             results.append(result)
     return results
 def process_dict_list(dict_list):
@@ -36,6 +37,7 @@ def process_dict_list(dict_list):
     }
     with open('summary.json', 'w') as f:
         json.dump(summary, f)
+        f.close()
     return summary
 
 if __name__ == "__main__":

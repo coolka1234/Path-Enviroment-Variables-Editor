@@ -15,5 +15,6 @@ def backup_catalog(pathOfFileToBackup, newBackupPath=None, nameOfBackup=datetime
     bsf.renameFiles(nameOfBackup, nameOfBackup)
     subprocess.run(["powershell", "Compress-Archive", nameOfBackup,os.path.join(os.environ["BACKUPS_DIR"], nameOfBackup), "-Force"], check=True)
     bsf.deleteFolder(nameOfBackup)
+
 if __name__ == "__main__":
     backup_catalog(pathOfFileToBackup=os.path.normpath(sys.argv[1]), newBackupPath=".\\backups\\")

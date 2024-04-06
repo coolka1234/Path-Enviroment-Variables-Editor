@@ -16,6 +16,7 @@ def copyFiles(source, destination, backupName):
 
 def deleteFolder(path):
     subprocess.run(["powershell", "Remove-Item", path, "-Recurse", "-Force"])
+
 def renameFiles(path, backupName):
     id_counter = 0
     for root, dirs, files in os.walk(path, topdown=False):

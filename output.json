@@ -1,9 +1,9 @@
 {
-  "file_path": "C:\\Users\\krzys\\OneDrive\\Pulpit\\Studia\\Semestr4\\SkryptoweLab\\Lista4\\tail.py",
-  "num_characters": 562,
-  "most_common_word": "=",
-  "most_common_char": "e",
-  "least_common_char": "+",
-  "num_rows": 30,
-  "num_words": 61
+  "file_path": "test_folder\\test1.txt",
+  "num_characters": 0,
+  "most_common_word": null,
+  "most_common_char": null,
+  "least_common_char": null,
+  "num_rows": 0,
+  "num_words": 0
 }
