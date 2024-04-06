@@ -1,17 +1,20 @@
 import os
+from re import sub
 import shutil
 import subprocess
 import datetime
 import time
 def createEnviromentalVariable(name="BACKUPS_DIR", value=None):
-    if name in os.environ:
+    if name in os.environ.keys() and value is not None:
         copyFiles(os.environ[name], value, "backup", False)
         deleteFolder(os.environ[name])
         print(f"Environmental variable {name} already exists. Deleting old folder and copying files to new location")
-    value = os.path.expanduser(r"~")
-    value=os.path.join(value, "backups")
+    if value is None:
+        value = os.path.expanduser(r"~")
+        value=os.path.join(value, "backups")
     os.environ[name] = value
-    print(f"Environmental variable {name} set to {value}")
+    if "BACKUPS_DIR" in os.environ:
+        print(f"Environmental variable BACKUPS_DIR set to {os.environ['BACKUPS_DIR']}")
 
 def copyFiles(source, destination, backupName, namesSignature):
     subprocess.run(["robocopy", source, destination, "/E"])

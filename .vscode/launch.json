@@ -10,7 +10,7 @@
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
-            "args": ["test_folder"],
+            "args": ["silly_folder", "test_folder", "backup_test", "-n"],
         }
     ]
 }
