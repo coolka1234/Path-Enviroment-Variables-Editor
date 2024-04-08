@@ -38,8 +38,15 @@ def process_dict_list(dict_list):
     with open('summary.json', 'w') as f:
         json.dump(summary, f)
         f.close()
+    print(summary)
     return summary
 
 if __name__ == "__main__":
-    dict_list=process_files(os.path.normpath(sys.argv[1]))
-    process_dict_list(dict_list)
+    try:
+        dict_list=process_files(os.path.normpath(sys.argv[1]))
+        process_dict_list(dict_list)
+    except Exception as e:
+        print(e)
+        print("Usage: python catalog_analyzer.py [directory]")
+        print("directory - path to directory with files to analyze")
+        sys.exit(1)

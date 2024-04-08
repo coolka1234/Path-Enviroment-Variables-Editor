@@ -5,6 +5,8 @@ import csv
 import sys
 import backup_script_functions as bsf
 def restore(path=os.path.join(os.getcwd(), ".backups")):
+    if(path=='' or path==None):
+        path=os.path.join(os.getcwd(), ".backups")
     if(not os.path.exists(path) or not os.path.isdir(path)):
         print("Path does not exist or is not a directory. Creating now.")
         os.mkdir(path)

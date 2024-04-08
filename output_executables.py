@@ -1,6 +1,7 @@
 import os
+import pathlib
 path = os.environ.get('PATH')
-directories = path.split(os.pathsep)
+directories = path.split(os.pathsep) # type: ignore
 def print_directories():
     for directory in directories:
         print(directory)

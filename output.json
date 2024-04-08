@@ -1,9 +1,9 @@
 {
-  "file_path": "test_folder\\test1.txt",
-  "num_characters": 0,
-  "most_common_word": null,
-  "most_common_char": null,
-  "least_common_char": null,
-  "num_rows": 0,
-  "num_words": 0
+  "file_path": "silly\\backup_log.csv",
+  "num_characters": 33,
+  "most_common_word": "2024_04_07_11_38_28,silly\\bck,bck",
+  "most_common_char": "_",
+  "least_common_char": "\\",
+  "num_rows": 1,
+  "num_words": 1
 }

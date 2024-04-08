@@ -12,7 +12,8 @@ def backup_catalog(pathOfFileToBackup,namesSignature, newBackupPath=None, nameOf
         bsf.createEnviromentalVariable(value=None)
     if not os.path.exists(os.environ['BACKUPS_DIR']):
         os.mkdir(os.environ['BACKUPS_DIR'])
-    subprocess.run(["powershell","mkdir", (nameOfBackup)])
+    if not os.path.exists(nameOfBackup):
+        subprocess.run(["powershell","mkdir", (nameOfBackup)])
     bsf.copyFiles(pathOfFileToBackup, nameOfBackup, nameOfBackup, namesSignature=namesSignature)
     cbl.create_backup_log(datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S"),os.path.join(os.environ["BACKUPS_DIR"], nameOfBackup), nameOfBackup)
     subprocess.run(["powershell", "Compress-Archive", nameOfBackup,os.path.join(os.environ["BACKUPS_DIR"], nameOfBackup), "-Force"], check=True)
