@@ -1,9 +1,9 @@
 {
-  "file_path": "silly\\backup_log.csv",
-  "num_characters": 33,
-  "most_common_word": "2024_04_07_11_38_28,silly\\bck,bck",
-  "most_common_char": "_",
-  "least_common_char": "\\",
-  "num_rows": 1,
-  "num_words": 1
+  "file_path": ".\\tail.py",
+  "num_characters": 562,
+  "most_common_word": "=",
+  "most_common_char": "e",
+  "least_common_char": "<",
+  "num_rows": 30,
+  "num_words": 61
 }
